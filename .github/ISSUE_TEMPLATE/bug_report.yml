@@ -1,0 +1,30 @@
+name: Bug report
+description: Something isn't working
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Juncle version
+  - type: input
+    id: os
+    attributes:
+      label: Windows version
+  - type: dropdown
+    id: admin
+    attributes:
+      label: Running as Administrator?
+      options: ["Yes", "No"]

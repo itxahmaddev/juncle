@@ -1,0 +1,21 @@
+{
+  "name": "juncle",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  },
+  "description": "Free, open source junk cleaner and system booster for Windows (Tauri 2)",
+  "license": "MIT",
+  "author": "Muhammad Ahmad",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itxahmaddev/juncle.git"
+  },
+  "homepage": "https://github.com/itxahmaddev/juncle"
+}

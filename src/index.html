@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juncle Cleaning Boost</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+
+  <nav class="sidebar">
+    <div class="brand">
+      <span class="mark"><img src="logo.png" alt=""></span>
+      <span class="wordmark">juncle<i>.</i></span>
+      <span class="tag">BOOST</span>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-label">Workspace</span>
+      <button class="nav active" data-page="home">
+        <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>Overview</button>
+      <button class="nav" data-page="junk">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v5M14 11v5"/></svg>Junk Cleaner</button>
+      <button class="nav" data-page="memory">
+        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v10M11 7v10M15 7v10M6 20v-3M18 20v-3"/></svg>Memory</button>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-label">Tools</span>
+      <button class="nav" data-page="disk">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>Disk Space</button>
+      <button class="nav" data-page="startup">
+        <svg viewBox="0 0 24 24"><path d="M12 3v9M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>Startup</button>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-label">App</span>
+      <button class="nav" data-page="about">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>About</button>
+    </div>
+
+    <div class="sidebar-foot">
+      <button id="theme-btn" class="ghost" title="Change theme">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></svg>
+        <span id="theme-label">System theme</span>
+      </button>
+      <span class="ver">v1.0</span>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <section class="page active" id="page-home">
+      <header class="head"><h1>Overview</h1><p>See how your PC is doing and clean it up in a click.</p></header>
+      <div class="grid3">
+        <div class="card stat">
+          <span class="eyebrow">Memory</span>
+          <div class="big" id="h-ram">&mdash;</div>
+          <div class="meter"><i id="h-ram-bar"></i></div>
+          <span class="sub" id="h-ram-sub">&nbsp;</span>
+          <button class="btn" data-go="memory">Open Memory</button>
+        </div>
+        <div class="card stat">
+          <span class="eyebrow">Main drive</span>
+          <div class="big" id="h-disk">&mdash;</div>
+          <div class="meter"><i id="h-disk-bar"></i></div>
+          <span class="sub" id="h-disk-sub">&nbsp;</span>
+          <button class="btn" data-go="disk">Open Disk Space</button>
+        </div>
+        <div class="card stat">
+          <span class="eyebrow">Junk files</span>
+          <div class="big" id="h-junk">Not scanned</div>
+          <div class="meter"><i id="h-junk-bar"></i></div>
+          <span class="sub" id="h-junk-sub">Find temp files and caches</span>
+          <button class="btn primary" id="h-scan">Scan Now</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Quick actions</div>
+        <div class="row gap">
+          <button class="btn primary" id="h-boost">Boost Memory</button>
+          <button class="btn" data-go="junk">Review Junk</button>
+          <button class="btn" data-go="startup">Manage Startup</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- JUNK -->
+    <section class="page" id="page-junk">
+      <header class="head">
+        <div><h1>Junk Cleaner</h1><p>Temporary files, caches and leftovers you can safely remove.</p></div>
+        <div class="row gap">
+          <button class="btn" id="junk-scan">Scan</button>
+          <button class="btn primary" id="junk-clean" disabled>Clean selected</button>
+        </div>
+      </header>
+      <div class="card fill">
+        <div class="bar-line" id="junk-progress"><i></i></div>
+        <div class="list" id="junk-list">
+          <div class="empty">Press <b>Scan</b> to look for junk files.</div>
+        </div>
+        <div class="row between foot">
+          <span class="muted" id="junk-total">Total junk found: &mdash;</span>
+          <span class="row gap-s">
+            <button class="btn sm" id="junk-all">Select all</button>
+            <button class="btn sm" id="junk-none">None</button>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMORY -->
+    <section class="page" id="page-memory">
+      <header class="head">
+        <div><h1>Memory</h1><p>Release memory held by idle programs. Nothing is closed.</p></div>
+        <div class="row gap">
+          <button class="btn" id="mem-refresh">Refresh</button>
+          <button class="btn primary" id="mem-boost">Boost memory</button>
+        </div>
+      </header>
+      <div class="card">
+        <div class="row between"><span class="eyebrow">RAM in use</span><span class="big sm" id="ram-pct">&mdash;</span></div>
+        <div class="meter lg"><i id="ram-bar"></i></div>
+        <div class="row between muted small">
+          <span id="ram-used">Used &mdash;</span><span id="ram-free">Available &mdash;</span><span id="ram-total">Total &mdash;</span>
+        </div>
+        <div class="muted small" id="swap-text"></div>
+      </div>
+      <div class="card fill">
+        <div class="card-title">Top programs</div>
+        <div class="list">
+          <table id="proc-table">
+            <thead><tr><th>Program</th><th class="num">PID</th><th class="num">Memory</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISK -->
+    <section class="page" id="page-disk">
+      <header class="head"><div><h1>Disk Space</h1><p>Where your storage went, and the biggest files you can remove.</p></div></header>
+      <div class="card"><div class="card-title">Drives</div><div id="drives"></div></div>
+      <div class="card fill">
+        <div class="row between">
+          <div class="card-title">Large files</div>
+          <span class="row gap-s">
+            <select id="big-min">
+              <option value="50">Over 50 MB</option>
+              <option value="100" selected>Over 100 MB</option>
+              <option value="500">Over 500 MB</option>
+              <option value="1024">Over 1 GB</option>
+            </select>
+            <button class="btn sm" id="big-scan">Find files</button>
+          </span>
+        </div>
+        <div class="list" id="big-list">
+          <div class="empty">Searches Downloads, Documents, Desktop, Videos, Pictures and Music.</div>
+        </div>
+        <div class="row between foot">
+          <span class="muted" id="big-total">Deleted files cannot be recovered.</span>
+          <button class="btn danger sm" id="big-delete" disabled>Delete selected</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STARTUP -->
+    <section class="page" id="page-startup">
+      <header class="head">
+        <div><h1>Startup</h1><p>Turn off programs you don't need when Windows starts. You can turn them back on any time.</p></div>
+        <button class="btn" id="startup-refresh">Refresh</button>
+      </header>
+      <div class="card fill">
+        <div class="list" id="startup-list"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="page" id="page-about">
+      <header class="head"><div><h1>About</h1><p>Juncle Cleaning Boost</p></div></header>
+      <div class="card about">
+        <span class="mark big-mark"><img src="logo.png" alt=""></span>
+        <div>
+          <div class="card-title">Juncle Cleaning Boost 1.0</div>
+          <p class="muted">Removes junk files, frees memory and helps you find what is eating your disk space. Everything runs on your PC.</p>
+          <p class="muted small">Tip: run as Administrator to also clean Windows Temp, Prefetch and Windows Update caches.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast" role="status"></div>
+  </main>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog">
+    <h3 id="dlg-title"></h3>
+    <p id="dlg-body"></p>
+    <div class="row gap right">
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn primary" id="dlg-ok" value="ok">OK</button>
+    </div>
+  </form>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
