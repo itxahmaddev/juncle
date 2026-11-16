@@ -106,7 +106,7 @@ jobs:
 
       - name: Upload installer artifact
         if: ${{ inputs.upload-artifacts }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.asset-prefix }}-${{ inputs.target }}
           path: dist-artifacts/*.exe
