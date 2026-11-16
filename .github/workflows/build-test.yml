@@ -1,0 +1,29 @@
+name: "Build Test"
+
+# Manual test build of the current branch.
+
+on: workflow_dispatch
+
+jobs:
+  build-test:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "windows-latest"
+            target: "x86_64-pc-windows-msvc"
+            args: ""
+          - platform: "windows-11-arm"
+            target: "aarch64-pc-windows-msvc"
+            args: "--target aarch64-pc-windows-msvc"
+
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: ${{ matrix.platform }}
+      target: ${{ matrix.target }}
+      build-args: ${{ matrix.args }}
+      asset-prefix: "juncle-test"
+      upload-artifacts: true
+    secrets: inherit

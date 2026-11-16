@@ -1,0 +1,36 @@
+name: "Main Branch Build"
+
+# Runs the Windows build on every push to main so breakage is caught before a
+# release. Artifacts are kept for 30 days, so any commit on main has a
+# downloadable, testable installer.
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "windows-latest"
+            target: "x86_64-pc-windows-msvc"
+            args: ""
+          - platform: "windows-11-arm"
+            target: "aarch64-pc-windows-msvc"
+            args: "--target aarch64-pc-windows-msvc"
+
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: ${{ matrix.platform }}
+      target: ${{ matrix.target }}
+      build-args: ${{ matrix.args }}
+      upload-artifacts: true
+    secrets: inherit

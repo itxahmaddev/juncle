@@ -314,7 +314,7 @@ fn read_memory() -> MemInfo {
             memory: p.memory(),
         })
         .collect();
-    top.sort_by(|a, b| b.memory.cmp(&a.memory));
+    top.sort_by_key(|p| std::cmp::Reverse(p.memory));
     top.truncate(15);
     MemInfo {
         total: sys.total_memory(),
@@ -453,7 +453,7 @@ async fn find_large_files(min_mb: u64) -> Vec<BigFile> {
                 }
             }
         }
-        found.sort_by(|a, b| b.size.cmp(&a.size));
+        found.sort_by_key(|f| std::cmp::Reverse(f.size));
         found.truncate(100);
         found
     })
@@ -563,4 +563,37 @@ pub fn run() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running Juncle");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn junk_category_ids_are_unique() {
+        let cats = categories();
+        let mut ids: Vec<_> = cats.iter().map(|c| c.id).collect();
+        ids.sort_unstable();
+        let total = ids.len();
+        ids.dedup();
+        assert_eq!(total, ids.len(), "duplicate category id");
+    }
+
+    #[test]
+    fn every_category_has_a_target() {
+        for c in categories() {
+            assert!(
+                c.recycle_bin || !c.roots.is_empty() || c.id == "firefox",
+                "category {} has nothing to scan",
+                c.id
+            );
+        }
+    }
+
+    #[test]
+    fn delete_files_refuses_paths_outside_the_profile() {
+        let res = delete_files(vec![r"C:\Windows\System32\drivers\etc\hosts".into()]);
+        assert_eq!(res.deleted, 0);
+        assert_eq!(res.failed, 1);
+    }
 }

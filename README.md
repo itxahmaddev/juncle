@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
-  <a href="https://github.com/itxahmaddev/juncle/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/itxahmaddev/juncle/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/itxahmaddev/juncle/actions/workflows/code-quality.yml"><img alt="Code quality" src="https://github.com/itxahmaddev/juncle/actions/workflows/code-quality.yml/badge.svg"></a>
   <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-blue">
   <a href="CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
 </p>
@@ -45,6 +45,8 @@ npm install
 npm run dev      # run in development
 npm run build    # build the installer (src-tauri/target/release/bundle)
 ```
+
+For platform details, ARM64 builds, CI workflows and releasing, see [BUILD.md](BUILD.md).
 
 ## Project layout
 
